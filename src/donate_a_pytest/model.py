@@ -27,10 +27,17 @@ class InputOutputRegistry:
         if cls._instance is None:
             cls._instance = cls.__new__(cls)
         return cls._instance
+    
+    def _check_duplicate(self, test_name: str, inp: dict, outp: dict, desc: Optional[str] = None) -> bool:
+        """Check if the input output set is already registered"""
+        for test_case in self._test_cases.get(test_name, []):
+            if test_case.inp == inp and test_case.outp == outp and test_case.desc == desc:
+                return True
+        return False
         
     
     def register(self, func_name: str="", func: callable=None, inp: dict=None, outp: dict=None, desc: Optional[str] = None) -> None:
-        """Register a test function"""
+        """Register an input output set for a test function"""
         logger = logging.getLogger(__name__)
 
         if func_name:
@@ -40,18 +47,27 @@ class InputOutputRegistry:
         else:
             raise ValueError("Either func_name or func must be provided")
 
-        for test_case in self._test_cases.get(test_name, []):
-            if test_case.inp == inp and test_case.outp == outp and test_case.desc == desc:
-                logger.info(f"Test case already registered: {test_name}")
-                return
+        if self._check_duplicate(test_name, inp, outp, desc):
+            logger.info(f"Test case already registered: {test_name}")
+            return
             
         tests_cases = self._test_cases.get(test_name, [])
         tests_cases.append(TestCase(inp=inp, outp=outp, desc=desc))
 
         self._test_cases[test_name] = tests_cases
     
+    def register_testcase(self, test_name: str, test_case: TestCase) -> None:
+        """Register a test case for a test function"""
+        if self._check_duplicate(test_name, test_case.inp, test_case.outp, test_case.desc):
+            logger.info(f"Test case already registered: {test_name}")
+            return
+        
+        tests_cases = self._test_cases.get(test_name, [])
+        tests_cases.append(test_case)
+        self._test_cases[test_name] = tests_cases
+        
     def get(self, func_name: str = "", func: callable = None) -> callable:
-        """Get a test function by name"""
+        """Get an input output set by name"""
         if func_name:
             return self._test_cases.get(func_name, [])  
         elif func:

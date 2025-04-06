@@ -51,7 +51,7 @@ def get_test_cases(func_name: str= "", func: callable = None) -> list:
     yaml_test_cases = crawl_yaml_test_cases(name)
     for test_case in chain(json_test_cases, yaml_test_cases):
         test_case = TestCase(**test_case)
-        InputOutputRegistry.get_instance().register(name, test_case.inp, test_case.outp, test_case.desc)
+        InputOutputRegistry.get_instance().register_testcase(name, test_case)
     
     return InputOutputRegistry.get_instance().get(name)
     
