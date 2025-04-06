@@ -37,10 +37,13 @@ def crawl_yaml_test_cases(test_name: str, search_dir: str = None) -> list:
     return test_cases
 
 
-def get_test_cases(func_name: str = "", func: callable = None) -> list:
+def get_all_test_cases(func_name: str = "", func: callable = None) -> list:
     """
     Get the test cases for a given function name or function
     """
+    logger = logging.getLogger(__name__)
+
+    logger.info(f"Getting all test cases for {func_name}")
     name = ""
     if func_name:
         name = func_name
@@ -56,4 +59,7 @@ def get_test_cases(func_name: str = "", func: callable = None) -> list:
         test_case = TestCase(**test_case)
         InputOutputRegistry.get_instance().register_testcase(name, test_case)
 
+    logger.info(
+        f"Found {len(InputOutputRegistry.get_instance().get(name))} test cases for {name}"
+    )
     return InputOutputRegistry.get_instance().get(name)
