@@ -4,8 +4,8 @@ import os
 def find_paths_with_substring(
     directory: str,
     substring: str,
-    exclude_substring: str = None,
     file_extension: str = None,
+    exclude_substring: str = None,
 ) -> list:
     """
     Walk through a directory and collect paths that contain a particular substring in their name.

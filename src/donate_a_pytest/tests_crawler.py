@@ -1,7 +1,10 @@
 import os
 import json
 import yaml
+import logging
+
 from itertools import chain
+
 from donate_a_pytest.utils import find_paths_with_substring
 from donate_a_pytest.model import TestCase, InputOutputRegistry
 
@@ -10,14 +13,23 @@ def crawl_json_test_cases(test_name: str, search_dir: str = None) -> list:
     """
     Crawl the json input for a given test name
     """
+    logger = logging.getLogger(__name__)
+
     search_dir = search_dir or os.getcwd()
     json_files = find_paths_with_substring(search_dir, test_name, ".json")
     test_cases = []
     for json_file in json_files:
-
         with open(json_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            test_cases.append(data)
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                logger.warning(f"Invalid JSON file: {json_file}")
+                continue
+
+            if isinstance(data, list):
+                test_cases.extend(data)
+            else:
+                test_cases.append(data)
 
     return test_cases
 
@@ -26,13 +38,23 @@ def crawl_yaml_test_cases(test_name: str, search_dir: str = None) -> list:
     """
     Crawl the yaml input for a given test name
     """
+    logger = logging.getLogger(__name__)
+
     search_dir = search_dir or os.getcwd()
     yaml_files = find_paths_with_substring(search_dir, test_name, ".yaml")
     test_cases = []
     for yaml_file in yaml_files:
         with open(yaml_file, "r", encoding="utf-8") as f:
-            data = yaml.load(f)
-            test_cases.append(data)
+            try:
+                data = yaml.load(f, Loader=yaml.SafeLoader)
+            except yaml.YAMLError:
+                logger.warning(f"Invalid YAML file: {yaml_file}")
+                continue
+
+            if isinstance(data, list):
+                test_cases.extend(data)
+            elif data:
+                test_cases.append(data)
 
     return test_cases
 
