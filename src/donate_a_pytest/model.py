@@ -2,11 +2,13 @@ from pydantic import BaseModel, Field
 from typing import Optional
 import logging
 
+logger = logging.getLogger(__name__)
+
 
 class TestCase(BaseModel):
     inp: dict = Field(alias="input")
     outp: dict = Field(alias="output")
-    desc: Optional[str] = Field(alias="description")
+    desc: Optional[str] = Field(default=None, alias="description")
 
 
 class InputOutputRegistry:
@@ -60,7 +62,7 @@ class InputOutputRegistry:
         else:
             raise ValueError("Either func_name or func must be provided")
 
-        target_case = TestCase(inp=inp, outp=outp, desc=desc)
+        target_case = TestCase(input=inp, output=outp, description=desc)
         if self._check_duplicate(test_name, target_case):
             logger.info(f"Test case already registered: {test_name}")
             return
