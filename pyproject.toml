@@ -1,17 +1,35 @@
 [project]
 name = "donate-a-pytest"
 version = "0.1.0"
-description = ""
+description = "A pytest extension for sharing test cases"
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Your Name", email = "you@example.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.10"
+license = {text = "MIT"}
+keywords = ["pytest", "testing", "test-cases", "sharing-tests"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 dependencies = [
     "pytest (>=8.3.5,<9.0.0)",
     "pydantic (>=2.11.2,<3.0.0)",
     "tqdm (>=4.67.1,<5.0.0)"
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/donate-a-pytest"
+"Bug Tracker" = "https://github.com/yourusername/donate-a-pytest/issues"
+"Documentation" = "https://github.com/yourusername/donate-a-pytest#readme"
 
 [project.scripts]
 donate-pytest = "donate_a_pytest.main:main"
