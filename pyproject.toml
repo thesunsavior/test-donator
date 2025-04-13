@@ -1,6 +1,6 @@
 [project]
 name = "donate-a-pytest"
-version = "0.1.2"
+version = "0.1.3"
 description = "A pytest extension for sharing test cases"
 authors = [
     {name = "Trung Pham", email = "trungphamquoc@outlook.com"}
@@ -35,6 +35,9 @@ dependencies = [
 [project.scripts]
 donate-pytest = "donate_a_pytest.main:main"
 
+[project.entry-points.pytest11]
+donate = "donate_a_pytest.plugin"
+
 [tool.poetry]
 packages = [{include = "donate_a_pytest", from = "src"}]
 
@@ -42,6 +45,11 @@ packages = [{include = "donate_a_pytest", from = "src"}]
 pytest-cov = "^4.1.0"
 pre-commit = "^3.5.0"
 black = "^24.3.0"
+
+[tool.pytest.ini_options]
+markers = [
+    "donate: mark tests that are created via the @register_for_donation decorator"
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

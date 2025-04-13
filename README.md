@@ -29,6 +29,44 @@ This decorator does two things:
 
 The test function will automatically run all test cases found for `my_function`.
 
+### Auto-discovery of Tests in Non-test Files
+
+Normally, pytest only discovers tests in files that have a `test_` prefix or `_test.py` suffix. However, this package extends pytest to discover tests in any Python file that contains functions decorated with `@register_for_donation`.
+
+This means you can organize your code naturally without having to separate your functions into test files:
+
+```python
+# In a regular file named my_functions.py (no test_ prefix)
+from donate_a_pytest import register_for_donation
+
+@register_for_donation
+def calculate_sum(a, b):
+    return a + b
+
+# When running pytest, the test_calculate_sum function
+# will be automatically discovered and run
+```
+
+When you run `pytest`, it will automatically find and run these tests, even though they're not in test files.
+
+### Using the Custom Marker
+
+When the package is installed, it automatically registers a custom pytest marker `donate`. You can use it in two ways:
+
+1. **Automatically**: The `@register_for_donation` decorator applies the marker to the generated test functions
+
+2. **Manually**: Apply the marker to any test function directly
+   ```python
+   from donate_a_pytest import donate
+
+   @donate
+   def test_my_custom_function():
+       # Test implementation
+       assert True
+   ```
+
+The marker is properly registered with pytest, so you won't see any warnings about unknown markers.
+
 ### Supported Output Types
 
 The framework supports any output type, not just dictionaries. You can return:
@@ -70,6 +108,13 @@ donate-pytest -d path/to/tests
 
 # Stop on first failure
 donate-pytest -f
+```
+
+You can also run them directly with pytest:
+
+```bash
+# Run all tests with the donate marker
+pytest -m donate
 ```
 
 ### Programmatic Usage
