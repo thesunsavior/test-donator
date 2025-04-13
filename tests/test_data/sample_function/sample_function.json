@@ -1,0 +1,32 @@
+[
+  {
+    "input": {"a": 1, "b": 2},
+    "output": 3,
+    "description": "Integer output"
+  },
+  {
+    "input": {"a": -1, "b": 1},
+    "output": 0,
+    "description": "Test with negative numbers"
+  },
+  {
+    "input": {"a": "hello", "b": "world"},
+    "output": "hello world",
+    "description": "String output"
+  },
+  {
+    "input": {"a": [1, 2], "b": [3, 4]},
+    "output": [1, 2, 3, 4],
+    "description": "List output"
+  },
+  {
+    "input": {"a": {"x": 1}, "b": {"y": 2}},
+    "output": {"x": 1, "y": 2},
+    "description": "Dictionary output"
+  },
+  {
+    "input": {"a": true, "b": false},
+    "output": true,
+    "description": "Boolean output"
+  }
+]

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Any
 import logging
 
 logger = logging.getLogger(__name__)
@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class TestCase(BaseModel):
     inp: dict = Field(alias="input")
-    outp: dict = Field(alias="output")
+    outp: Any = Field(alias="output")
     desc: Optional[str] = Field(default=None, alias="description")
 
 
@@ -49,7 +49,7 @@ class InputOutputRegistry:
         func_name: str = "",
         func: callable = None,
         inp: dict = None,
-        outp: dict = None,
+        outp: Any = None,
         desc: Optional[str] = None,
     ) -> None:
         """Register an input output set for a test function"""

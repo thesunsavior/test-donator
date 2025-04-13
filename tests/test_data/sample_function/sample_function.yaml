@@ -1,0 +1,39 @@
+- input:
+    a: 3
+    b: 4
+  output: 7
+  description: "Integer addition"
+
+- input:
+    a: 10
+    b: -5
+  output: 5
+  description: "Subtraction with negative numbers"
+
+- input:
+    a: "prefix"
+    b: "suffix"
+  output: "prefix suffix"
+  description: "String concatenation"
+
+- input:
+    a: [5, 6]
+    b: [7, 8]
+  output: [5, 6, 7, 8]
+  description: "List concatenation"
+
+- input:
+    a:
+      first: 1
+    b:
+      second: 2
+  output:
+    first: 1
+    second: 2
+  description: "Dictionary merging"
+
+- input:
+    a: true
+    b: false
+  output: true
+  description: "Boolean OR operation"
