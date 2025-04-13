@@ -1,0 +1,11 @@
+- input:
+    a: 3
+    b: 4
+  output: 7
+  description: "Integer addition"
+
+- input:
+    a: 10
+    b: -5
+  output: 5
+  description: "Subtraction with negative numbers"

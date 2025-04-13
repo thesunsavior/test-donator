@@ -1,0 +1,12 @@
+[
+  {
+    "input": {"a": 1, "b": 2},
+    "output": 3,
+    "description": "Integer output"
+  },
+  {
+    "input": {"a": -1, "b": 1},
+    "output": 0,
+    "description": "Test with negative numbers"
+  }
+]

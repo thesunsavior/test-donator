@@ -13,6 +13,9 @@ dependencies = [
     "tqdm (>=4.67.1,<5.0.0)"
 ]
 
+[project.scripts]
+donate-pytest = "donate_a_pytest.main:main"
+
 [tool.poetry]
 packages = [{include = "donate_a_pytest", from = "src"}]
 
