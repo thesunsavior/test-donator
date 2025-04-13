@@ -67,6 +67,72 @@ When the package is installed, it automatically registers a custom pytest marker
 
 The marker is properly registered with pytest, so you won't see any warnings about unknown markers.
 
+### Interface Functions
+
+donate-a-pytest provides a set of interface functions for programmatically registering and retrieving test cases without relying on JSON or YAML files:
+
+#### 1. Registering Individual Test Cases
+
+```python
+from donate_a_pytest import register_test_case, TestCase
+
+# Register a test case for a function
+register_test_case(
+    "add_numbers",  # Function name
+    TestCase(input={"a": 1, "b": 2}, output=3, description="Simple addition")
+)
+```
+
+#### 2. Registering Test Cases with Individual Parameters
+
+```python
+from donate_a_pytest import register
+
+# Register a test case by specifying input, output and description
+register(
+    func_name="multiply_numbers",
+    inp={"x": 5, "y": 4},
+    outp=20,
+    desc="Multiplying 5 and 4"
+)
+```
+
+#### 3. Registering Multiple Test Cases at Once
+
+```python
+from donate_a_pytest import register_test_cases, TestCase
+
+# Create multiple test cases
+test_cases = [
+    TestCase(input={"text": "hello"}, output="HELLO", description="Uppercase conversion"),
+    TestCase(input={"text": "WORLD"}, output="WORLD", description="Already uppercase")
+]
+
+# Register all test cases for a function
+register_test_cases("to_uppercase", test_cases)
+```
+
+#### 4. Retrieving Test Cases for a Function
+
+```python
+from donate_a_pytest import get_test_cases
+
+# Get all test cases for a specific function
+cases = get_test_cases("add_numbers")
+print(f"Found {len(cases)} test cases for add_numbers")
+```
+
+#### 5. Retrieving All Registered Test Cases
+
+```python
+from donate_a_pytest import get_all_test_cases
+
+# Get all registered test cases across all functions
+all_cases = get_all_test_cases()
+for func_name, cases in all_cases.items():
+    print(f"Function {func_name} has {len(cases)} test cases")
+```
+
 ### Supported Output Types
 
 The framework supports any output type, not just dictionaries. You can return:
