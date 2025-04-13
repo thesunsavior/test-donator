@@ -59,7 +59,9 @@ def crawl_yaml_test_cases(test_name: str, search_dir: str = None) -> list:
     return test_cases
 
 
-def get_all_test_cases(func_name: str = "", func: callable = None) -> list:
+def get_all_test_cases(
+    func_name: str = "", func: callable = None, search_dir: str = None
+) -> list:
     """
     Get the test cases for a given function name or function
     """
@@ -75,8 +77,10 @@ def get_all_test_cases(func_name: str = "", func: callable = None) -> list:
         raise ValueError("Either func_name or func must be provided")
 
     # Crawl the test cases from the json and yaml files
-    json_test_cases = crawl_json_test_cases(name)
-    yaml_test_cases = crawl_yaml_test_cases(name)
+    json_test_cases = crawl_json_test_cases(name, search_dir)
+    yaml_test_cases = crawl_yaml_test_cases(name, search_dir)
+    print(json_test_cases)
+    print(yaml_test_cases)
     for test_case in chain(json_test_cases, yaml_test_cases):
         test_case = TestCase(**test_case)
         InputOutputRegistry.get_instance().register_testcase(name, test_case)
