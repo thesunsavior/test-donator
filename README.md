@@ -162,6 +162,25 @@ The test suite includes:
 
 If you're adding new features, please include appropriate tests. The test coverage should remain above 90%.
 
+### Continuous Integration
+
+This project uses GitHub Actions for continuous integration. Every push and pull request triggers:
+
+1. **Pre-commit checks** - Ensures code quality using the pre-commit hooks
+2. **Tests** - Runs the test suite on multiple Python versions (3.8, 3.9, 3.10, 3.11)
+
+You can see the CI workflow configuration in `.github/workflows/python-tests.yml`.
+
+To run the same checks locally before committing:
+
+```bash
+# Install pre-commit hooks
+pre-commit install
+
+# Run pre-commit checks manually
+pre-commit run --all-files
+```
+
 ### Test Data
 
 When working with test data, you can add examples to the `tests/test_data` directory. This helps verify that your changes work correctly with different types of inputs and outputs.

@@ -19,6 +19,10 @@ donate-pytest = "donate_a_pytest.main:main"
 [tool.poetry]
 packages = [{include = "donate_a_pytest", from = "src"}]
 
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^4.1.0"
+pre-commit = "^3.5.0"
+black = "^24.3.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
