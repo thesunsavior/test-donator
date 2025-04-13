@@ -1,3 +1,4 @@
+import os
 import argparse
 import logging
 import sys
@@ -37,6 +38,8 @@ def run_donated_tests(
             logger.error(f"Directory {directory} does not exist")
             return {"success": False, "error": f"Directory {directory} does not exist"}
         pytest_args.append(str(directory_path))
+    else:
+        pytest_args.append(os.getcwd())
 
     # Add marker filter
     pytest_args.extend(["-m", "donate"])
