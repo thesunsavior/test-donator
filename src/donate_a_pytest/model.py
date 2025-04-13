@@ -89,3 +89,7 @@ class InputOutputRegistry:
             return self._test_cases.get(func.__name__, [])
         else:
             raise ValueError("Either func_name or func must be provided")
+
+    def get_all(self):
+        """Get all registered test cases."""
+        return self._test_cases
