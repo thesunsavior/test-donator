@@ -7,6 +7,8 @@ from donate_a_pytest.interface import (
     get_test_cases,
     get_all_test_cases,
     register_test_cases,
+    clear_function_test_cases,
+    clear_all_test_cases,
 )
 from donate_a_pytest.model import TestCase
 
@@ -21,4 +23,6 @@ __all__ = [
     "get_all_test_cases",
     "register_test_cases",
     "TestCase",
+    "clear_function_test_cases",
+    "clear_all_test_cases",
 ]
