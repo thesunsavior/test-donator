@@ -79,8 +79,6 @@ def get_all_test_cases(
     # Crawl the test cases from the json and yaml files
     json_test_cases = crawl_json_test_cases(name, search_dir)
     yaml_test_cases = crawl_yaml_test_cases(name, search_dir)
-    print(json_test_cases)
-    print(yaml_test_cases)
     for test_case in chain(json_test_cases, yaml_test_cases):
         test_case = TestCase(**test_case)
         InputOutputRegistry.get_instance().register_testcase(name, test_case)

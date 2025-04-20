@@ -7,10 +7,8 @@ It also allows pytest to discover tests in files without the test_ prefix.
 """
 
 import os
-import inspect
 import sys
 import pytest
-from pathlib import Path
 from donate_a_pytest.decorators import register_for_donation
 
 # Export the decorator for convenient imports

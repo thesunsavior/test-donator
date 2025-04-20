@@ -30,6 +30,11 @@ def register_for_donation(func):
         for test_case in tqdm(test_cases):
             func_args = test_case.inp
             output = func(**func_args)
+            logger.info("***********************")
+            logger.info(f"Input: {test_case.inp}")
+            logger.info(f"Expected output: {test_case.outp}")
+            logger.info(f"Actual output: {output}")
+            logger.info("***********************")
             assert output == test_case.outp
 
     # Rename the wrapper to ensure pytest collection
@@ -49,5 +54,4 @@ def register_for_donation(func):
             caller_module = frame.f_globals.get("__name__")
             if caller_module and caller_module in sys.modules:
                 setattr(sys.modules[caller_module], test_name, test_wrapper)
-
     return func
