@@ -1,6 +1,6 @@
 [project]
 name = "donate-a-pytest"
-version = "0.1.4"
+version = "0.1.5"
 description = "A pytest extension for sharing test cases"
 authors = [
     {name = "Trung Pham", email = "trungphamquoc@outlook.com"}
