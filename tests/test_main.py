@@ -1,8 +1,6 @@
 import os
 import sys
 import pytest
-import json
-import yaml
 import tempfile
 from pathlib import Path
 

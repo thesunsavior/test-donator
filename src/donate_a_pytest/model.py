@@ -93,3 +93,11 @@ class InputOutputRegistry:
     def get_all(self):
         """Get all registered test cases."""
         return self._test_cases
+
+    def clear(self):
+        """Clear all registered test cases."""
+        self._test_cases = {}
+
+    def clear_by_func_name(self, func_name: str):
+        """Clear all registered test cases for a given function name."""
+        self._test_cases.pop(func_name, None)

@@ -5,8 +5,6 @@ import tempfile
 import pytest
 
 from donate_a_pytest.decorators import register_for_donation
-from donate_a_pytest.tests_crawler import get_all_test_cases
-from donate_a_pytest.model import TestCase
 
 
 def test_function_preserved():

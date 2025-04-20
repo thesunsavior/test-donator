@@ -186,3 +186,19 @@ class TestInputOutputRegistry:
         assert (
             self.registry._check_duplicate("non_existent_func", duplicate_case) is False
         )
+
+    def test_clear_by_func_name(self):
+        """Test the clear_by_func_name method"""
+        self.registry.register(func_name="test_func", inp={"a": 1}, outp={"result": 2})
+        self.registry.register(func_name="test_func", inp={"a": 2}, outp={"result": 4})
+        self.registry.clear_by_func_name("test_func")
+        assert len(self.registry.get(func_name="test_func")) == 0
+
+    def test_clear(self):
+        """Test the clear method"""
+        self.registry.register(func_name="test_func", inp={"a": 1}, outp={"result": 2})
+        self.registry.register(
+            func_name="test_func_1", inp={"a": 2}, outp={"result": 4}
+        )
+        self.registry.clear()
+        assert len(self.registry.get_all()) == 0

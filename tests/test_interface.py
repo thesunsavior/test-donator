@@ -8,6 +8,8 @@ from donate_a_pytest.interface import (
     register,
     get_test_cases,
     get_all_test_cases,
+    clear_function_test_cases,
+    clear_all_test_cases,
 )
 from donate_a_pytest.model import TestCase, InputOutputRegistry
 
@@ -137,3 +139,30 @@ def test_get_all_with_cases(reset_registry):
     assert "func2" in all_cases
     assert len(all_cases["func1"]) == 1
     assert len(all_cases["func2"]) == 1
+
+
+def test_clear_function_test_cases(reset_registry):
+    """Test clearing test cases for a specific function."""
+    # Register test cases for multiple functions
+    register_test_case(
+        "func1", TestCase(input={"arg": 1}, output=1, description="Func1 case")
+    )
+    register_test_case(
+        "func1", TestCase(input={"arg": 2}, output=2, description="Func1 case 2")
+    )
+
+    clear_function_test_cases("func1")
+    assert len(get_test_cases("func1")) == 0
+
+
+def test_clear_all_test_cases(reset_registry):
+    """Test clearing all test cases."""
+    # Register test cases for multiple functions
+    register_test_case(
+        "func1", TestCase(input={"arg": 1}, output=1, description="Func1 case")
+    )
+    register_test_case(
+        "func2", TestCase(input={"arg": 2}, output=2, description="Func2 case")
+    )
+    clear_all_test_cases()
+    assert len(get_all_test_cases()) == 0

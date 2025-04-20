@@ -27,3 +27,11 @@ def get_test_cases(func_name: str):
 
 def get_all_test_cases():
     return InputOutputRegistry.get_instance().get_all()
+
+
+def clear_function_test_cases(func_name: str):
+    InputOutputRegistry.get_instance().clear_by_func_name(func_name)
+
+
+def clear_all_test_cases():
+    InputOutputRegistry.get_instance().clear()
