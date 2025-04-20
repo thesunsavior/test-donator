@@ -30,12 +30,16 @@ def register_for_donation(func):
         for test_case in tqdm(test_cases):
             func_args = test_case.inp
             output = func(**func_args)
+
+            # Print test information
             logger.info("***********************")
             logger.info(f"Input: {test_case.inp}")
             logger.info(f"Expected output: {test_case.outp}")
             logger.info(f"Actual output: {output}")
             logger.info("***********************")
-            assert output == test_case.outp
+
+            error_msg = f"\nFailed test case:\nInput: {test_case.inp}\nExpected output: {test_case.outp}\nActual output: {output}"
+            assert output == test_case.outp, error_msg
 
     # Rename the wrapper to ensure pytest collection
     test_name = f"test_{func.__name__}"
